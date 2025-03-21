@@ -22,7 +22,8 @@ namespace Leaernify
         SqlConnection con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Learnify;Integrated Security=True;");
         SqlCommand cmd;
 
-        public void loadDoesenCard(){
+        public void loadDoesenCard()
+        {
             con.Open();
             string query = "SELECT * FROM pengajar";
 
@@ -31,11 +32,10 @@ namespace Leaernify
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
 
-                    while (reader.Read()) // Loop untuk setiap dosen
+                    while (reader.Read())
                     {
                         int id = reader.GetInt32(0);
                         string nama = reader.GetString(1);
-
                         string mataPelajaran = reader.GetString(2);
                         string status = reader.GetString(3);
 
@@ -91,12 +91,11 @@ namespace Leaernify
                 Enabled = (status != "Booked"),
                 Tag = id,
                 AutoSize = true,
-                BackColor = Color.FromArgb(96, 139,193),
+                BackColor = Color.FromArgb(96, 139, 193),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat
             };
 
-            // Tambahkan elemen ke dalam card
             card.Controls.Add(lblNama);
             card.Controls.Add(lblMataPelajaran);
             card.Controls.Add(btnBooking);

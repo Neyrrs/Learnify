@@ -37,7 +37,7 @@ namespace Leaernify
                     {
                         try
                         {
-                            con.Open(); 
+                            con.Open();
                             string query = "UPDATE pengajar SET status = 'booked' WHERE id = @id";
                             using (SqlCommand cmd = new SqlCommand(query, con))
                             {
@@ -70,32 +70,32 @@ namespace Leaernify
         public void getData()
         {
             if (con.State == ConnectionState.Closed)
-            { 
-            try
             {
-                con.Open();
-                string query = "SELECT * FROM pengajar where status = 'available'";
-                SqlDataAdapter sda = new SqlDataAdapter(query, con);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                dataGridView1.DataSource = dt;
-
-                if (dataGridView1.Columns["Aksi"] == null)
+                try
                 {
-                    DataGridViewButtonColumn btnCancel = new DataGridViewButtonColumn();
-                    btnCancel.HeaderText = "Aksi";
-                    btnCancel.Text = "Cancel Booking";
-                    btnCancel.UseColumnTextForButtonValue = true;
-                    btnCancel.Name = "Aksi";
-                        dataGridView1.Columns.Add(btnCancel);
-                    con.Close();
+                    con.Open();
+                    string query = "SELECT * FROM pengajar where status = 'available'";
+                    SqlDataAdapter sda = new SqlDataAdapter(query, con);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    dataGridView1.DataSource = dt;
 
+                    if (dataGridView1.Columns["Aksi"] == null)
+                    {
+                        DataGridViewButtonColumn btnCancel = new DataGridViewButtonColumn();
+                        btnCancel.HeaderText = "Aksi";
+                        btnCancel.Text = "Cancel Booking";
+                        btnCancel.UseColumnTextForButtonValue = true;
+                        btnCancel.Name = "Aksi";
+                        dataGridView1.Columns.Add(btnCancel);
+                        con.Close();
+
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Terjadi kesalahan: " + ex.Message);
-            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Terjadi kesalahan: " + ex.Message);
+                }
             }
         }
 

@@ -12,3 +12,4 @@ C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Register.resources
 C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Home.resources
 C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Main.resources
 C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.History.resources
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Auth.resources

@@ -1,0 +1,14 @@
+C:\Users\Lenovo\source\repos\Leaernify\bin\Debug\Leaernify.exe.config
+C:\Users\Lenovo\source\repos\Leaernify\bin\Debug\Leaernify.exe
+C:\Users\Lenovo\source\repos\Leaernify\bin\Debug\Leaernify.pdb
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.csproj.AssemblyReference.cache
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Properties.Resources.resources
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.csproj.GenerateResource.cache
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.exe
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.pdb
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Login.resources
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Register.resources
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Home.resources
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Main.resources
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.History.resources

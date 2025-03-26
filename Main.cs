@@ -24,6 +24,7 @@ namespace Leaernify
 
         public void loadDoesenCard()
         {
+            flowLayoutPanel1.Controls.Clear();
             con.Open();
             string query = "SELECT * FROM pengajar";
 
@@ -86,15 +87,17 @@ namespace Leaernify
             Button btnBooking = new Button
             {
                 Font = new Font("Poppins", 7, FontStyle.Bold),
-                Text = "Status",
+                Text = (status == "Booked") ? "Sudah Dipesan" : "Book",
                 Location = new Point(10, 90),
                 Enabled = (status != "Booked"),
                 Tag = id,
                 AutoSize = true,
-                BackColor = Color.FromArgb(96, 139, 193),
+                BackColor = (status == "Booked") ? Color.Gray : Color.FromArgb(96, 139, 193),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat
             };
+
+            btnBooking.Click += BtnBooking_Click;
 
             card.Controls.Add(lblNama);
             card.Controls.Add(lblMataPelajaran);
@@ -102,6 +105,61 @@ namespace Leaernify
 
             return card;
         }
+
+        private void BtnBooking_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            int pengajarID = (int)btn.Tag;
+            int userID = userSession.id; // Ambil user_id dari session
+
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                // 🔹 Cek apakah pengajar masih available sebelum booking
+                string checkQuery = "SELECT status FROM Pengajar WHERE id = @id";
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
+                {
+                    checkCmd.Parameters.AddWithValue("@id", pengajarID);
+                    string status = checkCmd.ExecuteScalar()?.ToString();
+
+                    if (status == "Booked")
+                    {
+                        MessageBox.Show("Pengajar sudah dibooking oleh orang lain!", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                // 🔹 Masukkan data booking ke tabel Booking
+                string insertQuery = "INSERT INTO Booking (user_id, pengajar_id, status) VALUES (@user_id, @pengajar_id, 'Booked')";
+                using (SqlCommand insertCmd = new SqlCommand(insertQuery, con))
+                {
+                    insertCmd.Parameters.AddWithValue("@user_id", userID);
+                    insertCmd.Parameters.AddWithValue("@pengajar_id", pengajarID);
+                    insertCmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Berhasil melakukan booking!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Terjadi kesalahan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+
+                loadDoesenCard(); // 🔄 Refresh tampilan setelah booking
+            }
+        }
+
+
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {

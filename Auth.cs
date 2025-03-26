@@ -16,7 +16,7 @@ namespace Leaernify
         public Auth()
         {
             InitializeComponent();
-            loadPage(new Register());
+            loadPage(new Login(this));
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

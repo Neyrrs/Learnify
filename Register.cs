@@ -13,9 +13,12 @@ namespace Leaernify
 {
     public partial class Register : UserControl
     {
-        public Register()
+        private Auth auth;
+
+        public Register(Auth form)
         {
             InitializeComponent();
+            this.auth = form;
         }
         SqlConnection con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Learnify;Integrated Security=True;");
         SqlCommand cmd;
@@ -43,8 +46,8 @@ namespace Leaernify
 
                             object result = cmd.ExecuteScalar();
                             MessageBox.Show("Akun berhasil dibuat", "Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Login loginPage = new Login();
-                            loginPage.Show();
+                            //Login loginPage = new Login();
+                            //loginPage.Show();
                         }
                     }
 
@@ -66,8 +69,7 @@ namespace Leaernify
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Login loginPage = new Login();
-            loginPage.Show();
+            auth.loadPage(new Login(auth));
         }
     }
 }

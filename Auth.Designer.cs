@@ -47,6 +47,7 @@
             this.ClientSize = new System.Drawing.Size(804, 411);
             this.Controls.Add(this.panel1);
             this.Name = "Auth";
+            this.ShowIcon = false;
             this.Text = "Auth";
             this.ResumeLayout(false);
 

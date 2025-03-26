@@ -14,9 +14,12 @@ namespace Leaernify
 {
     public partial class Login : UserControl
     {
-        public Login()
+        private Auth auth;
+
+        public Login(Auth form)
         {
             InitializeComponent();
+            this.auth = form;
         }
 
         SqlConnection con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Learnify;Integrated Security=True;");
@@ -34,39 +37,59 @@ namespace Leaernify
                 if (txtUsername.Text != "" && txtPassword.Text != "")
                 {
                     con.Open();
-                    string query = "SELECT id FROM users WHERE Username=@username AND password=@password";
+                    string query = "SELECT id, role FROM users WHERE Username=@username AND password=@password";
+
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@username", txtUsername.Text);
                         cmd.Parameters.AddWithValue("@password", txtPassword.Text);
 
-                        object result = cmd.ExecuteScalar();
-                        if (result != null)
+                        SqlDataReader reader = cmd.ExecuteReader();
+
+                        if (reader.Read())
                         {
+                            int userId = reader.GetInt32(0);
+                            string role = reader.GetString(1).ToLower();
+
                             userSession.username = txtUsername.Text;
                             userSession.password = txtPassword.Text;
-                            userSession.id = Convert.ToInt32(result);
-                            Home home = new Home();
-                            ParentForm.Hide();
-                            home.Show();
+                            userSession.id = userId;
+
+                            if (role == "admin")
+                            {
+                                Dashboard dashboard = new Dashboard();
+                                ParentForm.Hide();
+                                dashboard.Show();
+                            }
+                            else if (role == "user")
+                            {
+                                Home home = new Home();
+                                ParentForm.Hide();
+                                home.Show();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Role pengguna tidak dikenali!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                         else
                         {
                             MessageBox.Show("Salah memasukkan username atau password!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                         }
+                        reader.Close();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Terjadi kesalahan", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Mohon isi username dan password!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Terjadi kesalahan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally {
+            finally 
+            {
                 con.Close();
             }
         }
@@ -74,6 +97,12 @@ namespace Leaernify
         private void Login_Load(object sender, EventArgs e)
         {
            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            auth.loadPage(new Register(auth));
+
         }
     }
 }

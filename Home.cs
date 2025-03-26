@@ -130,5 +130,10 @@ namespace Leaernify
         {
 
         }
+
+        private void sideBar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

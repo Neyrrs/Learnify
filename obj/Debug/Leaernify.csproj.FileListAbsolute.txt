@@ -18,3 +18,4 @@ C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Dashboard.resources
 C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.UserRequest.resources
 C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.Dashboard.id.resources
 C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\id\Leaernify.resources.dll
+C:\Users\Lenovo\source\repos\Leaernify\obj\Debug\Leaernify.BookingLog.resources

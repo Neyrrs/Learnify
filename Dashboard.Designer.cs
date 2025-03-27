@@ -34,7 +34,7 @@
             this.txtUsername = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.Button();
-            this.btnRequest = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnHistory = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.mainLayout = new System.Windows.Forms.Panel();
@@ -44,13 +44,13 @@
             // 
             // sideBar
             // 
-            resources.ApplyResources(this.sideBar, "sideBar");
             this.sideBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(139)))), ((int)(((byte)(193)))));
             this.sideBar.Controls.Add(this.label1);
             this.sideBar.Controls.Add(this.txtUsername);
             this.sideBar.Controls.Add(this.panel1);
             this.sideBar.Controls.Add(this.btnHistory);
             this.sideBar.Controls.Add(this.button2);
+            resources.ApplyResources(this.sideBar, "sideBar");
             this.sideBar.Name = "sideBar";
             // 
             // label1
@@ -67,51 +67,51 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.btnHome);
-            this.panel1.Controls.Add(this.btnRequest);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Cursor = System.Windows.Forms.Cursors.Default;
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // btnHome
             // 
-            resources.ApplyResources(this.btnHome, "btnHome");
             this.btnHome.BackColor = System.Drawing.Color.Transparent;
             this.btnHome.FlatAppearance.BorderSize = 0;
             this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(117)))), ((int)(((byte)(149)))), ((int)(((byte)(189)))));
+            resources.ApplyResources(this.btnHome, "btnHome");
             this.btnHome.ForeColor = System.Drawing.Color.White;
             this.btnHome.Name = "btnHome";
             this.btnHome.UseCompatibleTextRendering = true;
             this.btnHome.UseVisualStyleBackColor = false;
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click_1);
             // 
-            // btnRequest
+            // button1
             // 
-            resources.ApplyResources(this.btnRequest, "btnRequest");
-            this.btnRequest.BackColor = System.Drawing.Color.Transparent;
-            this.btnRequest.FlatAppearance.BorderSize = 0;
-            this.btnRequest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(117)))), ((int)(((byte)(149)))), ((int)(((byte)(189)))));
-            this.btnRequest.ForeColor = System.Drawing.Color.White;
-            this.btnRequest.Name = "btnRequest";
-            this.btnRequest.UseVisualStyleBackColor = false;
-            this.btnRequest.Click += new System.EventHandler(this.btnRequest_Click);
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(117)))), ((int)(((byte)(149)))), ((int)(((byte)(189)))));
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnHistory
             // 
-            resources.ApplyResources(this.btnHistory, "btnHistory");
             this.btnHistory.BackColor = System.Drawing.Color.Transparent;
             this.btnHistory.FlatAppearance.BorderSize = 0;
             this.btnHistory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(117)))), ((int)(((byte)(149)))), ((int)(((byte)(189)))));
+            resources.ApplyResources(this.btnHistory, "btnHistory");
             this.btnHistory.ForeColor = System.Drawing.Color.White;
             this.btnHistory.Name = "btnHistory";
             this.btnHistory.UseVisualStyleBackColor = false;
             // 
             // button2
             // 
-            resources.ApplyResources(this.button2, "button2");
             this.button2.BackColor = System.Drawing.Color.Transparent;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(117)))), ((int)(((byte)(149)))), ((int)(((byte)(189)))));
+            resources.ApplyResources(this.button2, "button2");
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = false;
@@ -121,6 +121,7 @@
             resources.ApplyResources(this.mainLayout, "mainLayout");
             this.mainLayout.BackColor = System.Drawing.Color.White;
             this.mainLayout.Name = "mainLayout";
+            this.mainLayout.Paint += new System.Windows.Forms.PaintEventHandler(this.mainLayout_Paint);
             // 
             // Dashboard
             // 
@@ -130,6 +131,7 @@
             this.Controls.Add(this.mainLayout);
             this.Name = "Dashboard";
             this.ShowIcon = false;
+            this.Load += new System.EventHandler(this.Dashboard_Load);
             this.sideBar.ResumeLayout(false);
             this.sideBar.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -144,7 +146,7 @@
         private System.Windows.Forms.Label txtUsername;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnHome;
-        private System.Windows.Forms.Button btnRequest;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnHistory;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel mainLayout;

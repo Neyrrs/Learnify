@@ -18,8 +18,15 @@ namespace Leaernify
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridView1.Columns["Aksi"].Index && e.RowIndex >= 0)
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Aksi" && e.RowIndex >= 0)
             {
+                var statusCell = dataGridView1.Rows[e.RowIndex].Cells["Status"].Value;
+                if (statusCell != null && statusCell.ToString() != "Booked")
+                {
+                    MessageBox.Show("Hanya booking dengan status 'Booked' yang bisa dibatalkan!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 var bookingIDCell = dataGridView1.Rows[e.RowIndex].Cells["Booking_ID"].Value;
 
                 if (bookingIDCell != null)
@@ -34,8 +41,7 @@ namespace Leaernify
                         try
                         {
                             con.Open();
-
-                            string queryBooking = "UPDATE Booking SET status = 'Cancelled' WHERE id = @bookingID";
+                            string queryBooking = "UPDATE Booking SET status = 'Pending cancel' WHERE id = @bookingID";
                             using (SqlCommand cmdBooking = new SqlCommand(queryBooking, con))
                             {
                                 cmdBooking.Parameters.AddWithValue("@bookingID", bookingID);
@@ -53,12 +59,11 @@ namespace Leaernify
                         {
                             con.Close();
                         }
-
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Data Booking ID atau Pengajar ID tidak ditemukan!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Data Booking ID tidak ditemukan!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -79,7 +84,7 @@ namespace Leaernify
                         b.status AS Status
                     FROM Booking b
                     JOIN Pengajar p ON b.pengajar_id = p.id
-                    WHERE b.user_id = @id";
+                    WHERE b.user_id = @id AND b.status != 'cancelled'";
 
                 SqlDataAdapter sda = new SqlDataAdapter(query, con);
                 sda.SelectCommand.Parameters.AddWithValue("@id", userID);
@@ -135,6 +140,20 @@ namespace Leaernify
         private void History_Load(object sender, EventArgs e)
         {
             dataGridView1.CellClick += dataGridView1_CellContentClick;
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Aksi" && e.RowIndex >= 0)
+            {
+                var statusCell = dataGridView1.Rows[e.RowIndex].Cells["Status"].Value;
+                if (statusCell != null && statusCell.ToString() != "Booked")
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells["Aksi"].ReadOnly = true;
+                    dataGridView1.Rows[e.RowIndex].Cells["Aksi"].Style.ForeColor = Color.Gray;
+                    dataGridView1.Rows[e.RowIndex].Cells["Aksi"].Style.BackColor = Color.LightGray;
+                }
+            }
         }
     }
 }

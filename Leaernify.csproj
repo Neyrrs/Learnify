@@ -67,6 +67,12 @@
     <Compile Include="Auth.Designer.cs">
       <DependentUpon>Auth.cs</DependentUpon>
     </Compile>
+    <Compile Include="BookingLog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BookingLog.Designer.cs">
+      <DependentUpon>BookingLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     <Compile Include="userSession.cs" />
     <EmbeddedResource Include="Auth.resx">
       <DependentUpon>Auth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookingLog.resx">
+      <DependentUpon>BookingLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.id.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>

@@ -37,23 +37,34 @@ namespace Leaernify
                 if (txtUsername.Text != "" && txtPassword.Text != "")
                 {
                     con.Open();
-                    string query = "SELECT id, role FROM users WHERE Username=@username AND password=@password";
+                    string query = "SELECT id, nama, alamat, email, noTelp, role, namaLengkap FROM users WHERE nama=@nama AND password=@password";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        cmd.Parameters.AddWithValue("@username", txtUsername.Text);
+                        cmd.Parameters.AddWithValue("@nama", txtUsername.Text);
                         cmd.Parameters.AddWithValue("@password", txtPassword.Text);
 
                         SqlDataReader reader = cmd.ExecuteReader();
 
                         if (reader.Read())
                         {
-                            int userId = reader.GetInt32(0);
-                            string role = reader.GetString(1).ToLower();
+                            int id = reader.GetInt32(0);
+                            string nama = reader.GetString(1).ToLower();
+                            string alamat = reader.GetString(2).ToLower();
+                            string email = reader.GetString(3).ToLower();
+                            string noTelp = reader.GetString(4).ToLower();
+                            string role = reader.GetString(5).ToLower();
+                            string namaLengkap = reader.GetString(6).ToLower();
 
-                            userSession.username = txtUsername.Text;
+                            userSession.id = id;
+                            userSession.nama = txtUsername.Text;
+                            userSession.namaLengkap = namaLengkap;
+                            userSession.alamat = alamat;
+                            userSession.email = email;
+                            userSession.noTelp = noTelp;
                             userSession.password = txtPassword.Text;
-                            userSession.id = userId;
+                            userSession.role = role;
+                            Console.WriteLine(nama, namaLengkap, alamat, email, noTelp, txtPassword.Text, role);
 
                             if (role == "admin")
                             {
@@ -61,7 +72,7 @@ namespace Leaernify
                                 ParentForm.Hide();
                                 dashboard.Show();
                             }
-                            else if (role == "user")
+                            else if (role == "siswa")
                             {
                                 Home home = new Home();
                                 ParentForm.Hide();

@@ -24,16 +24,16 @@ namespace Leaernify
             try
             {
                 con.Open();
-                string query = "SELECT username FROM users WHERE username = @username";
+                string query = "SELECT nama FROM users WHERE nama = @nama";
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    cmd.Parameters.AddWithValue("@username", userSession.username);
+                    cmd.Parameters.AddWithValue("@nama", userSession.nama);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            txtUsername.Text = reader["username"].ToString();
+                            txtUsername.Text = reader["nama"].ToString();
                         }
                         else
                         {
@@ -63,7 +63,7 @@ namespace Leaernify
         {
             //String username = txtName.Text;
             con.Open();
-            string query = "Update users set username = @username where role = 'user'";
+            string query = "Update users set nama = @username where role = 'siswa'";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
                 //cmd.Parameters.AddWithValue("@username", username);

@@ -29,20 +29,19 @@ namespace Leaernify
             string query = "SELECT * FROM pengajar";
 
             using (SqlCommand cmd = new SqlCommand(query, con))
-            {
+            { 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
 
                     while (reader.Read())
                     {
-                        int id = reader.GetInt32(0);
+                        int id = reader.GetInt32(0);  
                         string nama = reader.GetString(1);
                         string mataPelajaran = reader.GetString(2);
                         string status = reader.GetString(3);
 
                         if (status != null)
                         {
-
                             Panel dosenCard = CreateDosenCard(id, nama, mataPelajaran, status);
                             flowLayoutPanel1.Controls.Add(dosenCard);
                         }
@@ -64,8 +63,7 @@ namespace Leaernify
                 Size = new Size(250, 150),
                 BorderStyle = BorderStyle.FixedSingle,
                 BackColor = Color.White,
-                Margin = new Padding(10),
-
+                Margin = new Padding(10) 
             };
 
             Label lblNama = new Label
@@ -110,7 +108,7 @@ namespace Leaernify
         {
             Button btn = sender as Button;
             int pengajarID = (int)btn.Tag;
-            int userID = userSession.id; // Ambil user_id dari session
+            int userID = userSession.id;
 
             try
             {
@@ -119,7 +117,6 @@ namespace Leaernify
                     con.Open();
                 }
 
-                // 🔹 Cek apakah pengajar masih available sebelum booking
                 string checkQuery = "SELECT status FROM Pengajar WHERE id = @id";
                 using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
                 {
@@ -132,8 +129,7 @@ namespace Leaernify
                         return;
                     }
                 }
-
-                // 🔹 Masukkan data booking ke tabel Booking
+                
                 string insertQuery = "INSERT INTO Booking (user_id, pengajar_id, status) VALUES (@user_id, @pengajar_id, 'Booked')";
                 using (SqlCommand insertCmd = new SqlCommand(insertQuery, con))
                 {
@@ -155,7 +151,7 @@ namespace Leaernify
                     con.Close();
                 }
 
-                loadDoesenCard(); // 🔄 Refresh tampilan setelah booking
+                loadDoesenCard();
             }
         }
 

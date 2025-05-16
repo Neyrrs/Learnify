@@ -123,7 +123,7 @@
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblLogin);
             this.Name = "Login";
-            this.Size = new System.Drawing.Size(425, 330);
+            this.Size = new System.Drawing.Size(550, 330);
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

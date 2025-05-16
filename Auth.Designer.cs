@@ -36,7 +36,7 @@
             this.panel1.Location = new System.Drawing.Point(3, 2);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(425, 330);
+            this.panel1.Size = new System.Drawing.Size(500, 330);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -49,6 +49,7 @@
             this.Name = "Auth";
             this.ShowIcon = false;
             this.Text = "Auth";
+            this.Load += new System.EventHandler(this.Auth_Load);
             this.ResumeLayout(false);
 
         }

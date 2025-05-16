@@ -38,16 +38,20 @@ namespace Leaernify
                     if (confirm == DialogResult.Yes)
                     {
                         con.Open();
-                        string query = "insert into users VALUES(@username,@password, 'user')";
+                        string query = "insert into users VALUES(@nama,@password,@alamat,@email, @noTelp, 'siswa', @namaLengkap)";
                         using (SqlCommand cmd = new SqlCommand(query, con))
                         {
-                            cmd.Parameters.AddWithValue("@username", txtUsername.Text);
+                            cmd.Parameters.AddWithValue("@nama", txtUsername.Text);
                             cmd.Parameters.AddWithValue("@password", txtPassword.Text);
+                            cmd.Parameters.AddWithValue("@alamat", textArea.Text);
+                            cmd.Parameters.AddWithValue("@email", txtEmail.Text);
+                            cmd.Parameters.AddWithValue("@noTelp", txtNoTelp.Text);
+                            cmd.Parameters.AddWithValue("@namaLengkap", txtNamaLengkap.Text);
 
                             object result = cmd.ExecuteScalar();
                             MessageBox.Show("Akun berhasil dibuat", "Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            //Login loginPage = new Login();
-                            //loginPage.Show();
+                            Login loginPage = new Login(auth);
+                            loginPage.Show();
                         }
                     }
 

@@ -30,5 +30,10 @@ namespace Leaernify
             page.Dock = DockStyle.Fill;
             panel1.Controls.Add(page);
         }
+
+        private void Auth_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
